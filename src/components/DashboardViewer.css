@@ -1,0 +1,411 @@
+/* ==========================================================================
+   DashboardViewer Component Styles
+   ========================================================================== */
+
+.viewer-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  background-color: #f1f5f9;
+  background-image: 
+    radial-gradient(#cbd5e1 0.75px, transparent 0.75px),
+    radial-gradient(#e2e8f0 0.75px, #f1f5f9 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   Top Bar
+   -------------------------------------------------------------------------- */
+.viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  z-index: 20;
+  flex-shrink: 0;
+}
+
+.viewer-header__breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.crumb-root {
+  font-weight: 700;
+  color: #034b8c;
+  letter-spacing: -0.01em;
+}
+
+.crumb-sep {
+  color: #94a3b8;
+}
+
+.crumb-section {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.crumb-current {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.crumb-badge {
+  font-size: 11px;
+  font-weight: 600;
+  background: #e0f2fe;
+  color: #0284c7;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  margin-left: 4px;
+}
+
+/* Quick View Switcher Pills */
+.viewer-header__quick-switch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f1f5f9;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.quick-pill {
+  border: 0;
+  background: transparent;
+  color: #64748b;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.quick-pill:hover:not(.quick-pill--active) {
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.quick-pill--active {
+  background: #ffffff;
+  color: #0284c7;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+}
+
+/* Action Controls (Zoom, Fullscreen) */
+.viewer-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zoom-group {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 2px 4px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.action-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.action-btn--active {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.action-btn--active:hover {
+  background: #0369a1;
+  color: #ffffff;
+}
+
+.zoom-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #334155;
+  padding: 0 8px;
+  cursor: pointer;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.zoom-label:hover {
+  color: #0284c7;
+}
+
+.divider-vert {
+  width: 1px;
+  height: 20px;
+  background: #e2e8f0;
+  margin: 0 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Stage & Image Viewport
+   -------------------------------------------------------------------------- */
+.viewer-stage {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 20px 48px;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.viewer-stage--fit-screen {
+  overflow: hidden;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.dashboard-image-wrapper {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 
+    0 10px 30px -5px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(15, 23, 42, 0.05);
+  background: #ffffff;
+  overflow: hidden;
+  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 200ms ease;
+}
+
+.dashboard-image-wrapper.is-loading {
+  opacity: 0.85;
+  transform: scale(0.995);
+}
+
+.dashboard-image-wrapper.is-loaded {
+  opacity: 1;
+  animation: imageFadeIn 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dashboard-page-img {
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  object-fit: contain;
+  user-select: none;
+}
+
+.img-fit-width {
+  width: 100%;
+  max-width: 1280px;
+  height: auto;
+}
+
+.img-fit-screen {
+  max-width: 100%;
+  max-height: calc(100vh - 120px);
+  width: auto;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Placeholder View (Customers, Messages)
+   -------------------------------------------------------------------------- */
+.dashboard-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  width: 100%;
+}
+
+.placeholder-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  animation: imageFadeIn 300ms ease;
+}
+
+.placeholder-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  color: #0284c7;
+  margin-bottom: 20px;
+}
+
+.placeholder-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+.placeholder-card p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+.placeholder-tips {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: #475569;
+  text-align: left;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.placeholder-tips svg {
+  flex-shrink: 0;
+  color: #0284c7;
+  margin-top: 2px;
+}
+
+.placeholder-action-btn {
+  border: 0;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 9px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+  transition: all 160ms ease;
+}
+
+.placeholder-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Floating Bottom Status Bar
+   -------------------------------------------------------------------------- */
+.viewer-statusbar {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f8fafc;
+  font-size: 11px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 15;
+  animation: imageFadeIn 400ms ease;
+}
+
+.statusbar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.statusbar-text {
+  color: #e2e8f0;
+}
+
+.statusbar-text strong {
+  color: #ffffff;
+}
+
+.statusbar-shortcut {
+  background: rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: monospace;
+}
+
+/* --------------------------------------------------------------------------
+   Animations
+   -------------------------------------------------------------------------- */
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .viewer-header__quick-switch {
+    display: none;
+  }
+  .crumb-section {
+    display: none;
+  }
+  .viewer-stage {
+    padding: 10px 10px 48px;
+  }
+}
