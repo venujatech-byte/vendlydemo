@@ -1,101 +1,50 @@
-import { useState, useRef, useEffect } from "react";
 import "./Sidebar.css";
 import vendlyLogo from "../assets/vendly-logo.png";
-import vendlyCollapsedLogo from "../assets/Vendlylogofinal.png";
 import {
-  LayoutDashboard,
+  LayoutGrid,
   ClipboardList,
   Box,
   Truck,
   Users,
   MessageSquare,
-  ChartNoAxesCombined,
+  BarChart2,
   Store,
   ChevronRight,
-  PanelLeftClose,
-  PanelLeftOpen,
-  UserRound,
-  UsersRound,
-  Sparkles,
-  CreditCard,
-  Settings,
-  LogOut,
 } from "lucide-react";
 
-export const NAVIGATION_ITEMS = [
-  { id: "overview", label: "Overview", icon: LayoutDashboard, badge: null },
-  { id: "orders", label: "Orders", icon: ClipboardList, badge: "12" },
-  { id: "inventory", label: "Inventory", icon: Box, badge: "32" },
-  { id: "couriers", label: "Couriers", icon: Truck, badge: "1" },
-  { id: "analytics", label: "Analytics", icon: ChartNoAxesCombined, badge: "Live" },
-  { id: "customers", label: "Customers", icon: Users, badge: "9" },
-  { id: "messages", label: "Messages", icon: MessageSquare, badge: null },
+export const navigationItems = [
+  { id: "overview", label: "Overview", icon: LayoutGrid },
+  { id: "orders", label: "Orders", icon: ClipboardList },
+  { id: "inventory", label: "Inventory", icon: Box },
+  { id: "couriers", label: "Couriers", icon: Truck },
+  { id: "customers", label: "Customers", icon: Users },
+  { id: "messages", label: "Messages", icon: MessageSquare },
+  { id: "analytics", label: "Analytics", icon: BarChart2 },
 ];
 
-function Sidebar({
-  activeTab = "overview",
-  onSelectTab,
-  isCollapsed = false,
-  onToggleCollapse,
-  onOpenProfile,
-  onOpenSettings,
-}) {
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const profileMenuRef = useRef(null);
-
-  useEffect(() => {
-    function closeProfileMenu(e) {
-      if (!profileMenuRef.current?.contains(e.target)) {
-        setIsProfileMenuOpen(false);
-      }
-    }
-    document.addEventListener("pointerdown", closeProfileMenu);
-    return () => document.removeEventListener("pointerdown", closeProfileMenu);
-  }, []);
-
-  const businessName = "Vendly";
-  const sellerRole = "Owner";
-
+function Sidebar({ activeTab = "overview", onSelectTab }) {
   return (
-    <aside
-      id="sidebar-navigation"
-      className={`sidebar ${isCollapsed ? "sidebar--collapsed" : ""}`}
-    >
-      {/* Sidebar Header: Logo & Collapse Button */}
+    <aside id="sidebar-navigation" className="sidebar">
+      {/* Brand logo and dashboard subtitle */}
       <div className="sidebar__top">
         <div
-          className="sidebar__logo-wrapper"
+          className="sidebar__logo"
           onClick={() => onSelectTab && onSelectTab("overview")}
-          title="Vendly Seller Dashboard"
           role="button"
           tabIndex={0}
         >
           <img
             className="sidebar__logo-image"
-            src={isCollapsed ? vendlyCollapsedLogo : vendlyLogo}
-            alt="Vendly"
+            src={vendlyLogo}
+            alt="Vendly.lk"
           />
         </div>
-        {!isCollapsed && (
-          <small className="sidebar__subtitle">Seller Dashboard</small>
-        )}
-
-        {onToggleCollapse && (
-          <button
-            type="button"
-            className="sidebar__collapse-toggle"
-            onClick={onToggleCollapse}
-            title={isCollapsed ? "Expand Sidebar (Hotkey: [ )" : "Collapse Sidebar (Hotkey: [ )"}
-            aria-label={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-          >
-            {isCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
-          </button>
-        )}
+        <small className="sidebar__subtitle">Seller Dashboard</small>
       </div>
 
       {/* Main navigation links */}
-      <nav className="sidebar__navigation" aria-label="Main Navigation">
-        {NAVIGATION_ITEMS.map((item) => {
+      <nav className="sidebar__navigation" aria-label="Sidebar Navigation">
+        {navigationItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
 
@@ -105,108 +54,29 @@ function Sidebar({
               key={item.id}
               className={`sidebar__link ${isActive ? "sidebar__link--active" : ""}`}
               onClick={() => onSelectTab && onSelectTab(item.id)}
-              title={isCollapsed ? item.label : undefined}
             >
-              <Icon size={20} strokeWidth={isActive ? 2.6 : 2.2} />
+              <Icon size={18} strokeWidth={isActive ? 2.4 : 2} />
               <span className="sidebar__label">{item.label}</span>
-              {item.badge && !isCollapsed && (
-                <span className={`sidebar__badge ${isActive ? "sidebar__badge--active" : ""}`}>
-                  {item.badge}
-                </span>
-              )}
             </button>
           );
         })}
       </nav>
 
-      {/* Business switcher & profile anchor */}
-      <div className="sidebar__footer" ref={profileMenuRef}>
-        {isProfileMenuOpen && (
-          <div className="sidebar__profile-menu" role="menu">
-            <button
-              type="button"
-              onClick={() => {
-                setIsProfileMenuOpen(false);
-                if (onOpenProfile) onOpenProfile();
-              }}
-              role="menuitem"
-            >
-              <UserRound size={15} /> My Profile
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsProfileMenuOpen(false);
-                if (onOpenSettings) onOpenSettings("staff");
-              }}
-              role="menuitem"
-            >
-              <UsersRound size={15} /> Staff & permissions
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsProfileMenuOpen(false);
-                if (onOpenSettings) onOpenSettings("plan");
-              }}
-              role="menuitem"
-            >
-              <Sparkles size={15} /> Current plan
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsProfileMenuOpen(false);
-                if (onOpenSettings) onOpenSettings("billing");
-              }}
-              role="menuitem"
-            >
-              <CreditCard size={15} /> Billing
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsProfileMenuOpen(false);
-                if (onOpenSettings) onOpenSettings("general");
-              }}
-              role="menuitem"
-            >
-              <Settings size={15} /> All settings
-            </button>
-            <button
-              className="sidebar__profile-menu-danger"
-              type="button"
-              onClick={() => {
-                setIsProfileMenuOpen(false);
-                alert("Logged out from Vendly Seller session");
-              }}
-              role="menuitem"
-            >
-              <LogOut size={15} /> Log out
-            </button>
-          </div>
-        )}
-
-        <button
-          className="sidebar__business"
-          type="button"
-          onClick={() => setIsProfileMenuOpen((curr) => !curr)}
-          title={isCollapsed ? businessName : undefined}
-          aria-haspopup="menu"
-          aria-expanded={isProfileMenuOpen}
-        >
+      {/* Business switcher anchored at the bottom */}
+      <div className="sidebar__footer">
+        <button className="sidebar__business" type="button">
           <span className="sidebar__business-icon">
-            <Store size={18} aria-hidden="true" />
+            <Store size={15} aria-hidden="true" />
           </span>
 
-          <span className="sidebar__business-details sidebar__label">
-            <strong>{businessName}</strong>
-            <small>{sellerRole}</small>
+          <span className="sidebar__business-details">
+            <strong>Vendly</strong>
+            <small>Owner</small>
           </span>
 
           <ChevronRight
-            className={`sidebar__business-arrow ${isProfileMenuOpen ? "is-open" : ""}`}
-            size={16}
+            className="sidebar__business-arrow"
+            size={14}
             aria-hidden="true"
           />
         </button>

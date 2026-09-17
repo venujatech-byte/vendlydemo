@@ -1,167 +1,39 @@
-/* Main App Shell Layout */
-.app-shell {
+.app-layout {
   display: flex;
   width: 100vw;
   height: 100vh;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  position: relative;
-  background-color: #0b192c;
+  background-color: #ffffff;
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Modal Overlay & Card */
-.app-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 1000;
+.dashboard-content {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffff;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: modalFade 160ms ease-out;
-}
-
-.app-modal-content {
-  background: #ffffff;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 440px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  animation: modalPop 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.app-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.app-modal-header h3 {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
   margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  color: #0f172a;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
 }
 
-.modal-close-btn {
-  background: transparent;
-  border: 0;
-  font-size: 22px;
-  line-height: 1;
-  color: #94a3b8;
-  cursor: pointer;
-  border-radius: 6px;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-close-btn:hover {
-  background: #f1f5f9;
-  color: #0f172a;
-}
-
-.app-modal-body {
-  padding: 20px;
-}
-
-.modal-business-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  margin-bottom: 16px;
-}
-
-.business-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0284c7, #0369a1);
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-business-card h4 {
-  margin: 0 0 2px;
-  font-size: 15px;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.modal-business-card p {
-  margin: 0 0 6px;
-  font-size: 12px;
-  color: #64748b;
-}
-
-.business-badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 700;
-  color: #047857;
-  background: #d1fae5;
-  padding: 2px 7px;
-  border-radius: 9999px;
-}
-
-.modal-note {
-  font-size: 13px;
-  color: #64748b;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.app-modal-footer {
-  padding: 12px 20px;
-  background: #f8fafc;
-  border-top: 1px solid #e2e8f0;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.modal-secondary-btn {
-  background: #0284c7;
-  color: #ffffff;
-  border: 0;
-  padding: 8px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 150ms ease;
-}
-
-.modal-secondary-btn:hover {
-  background: #0369a1;
-}
-
-@keyframes modalFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes modalPop {
-  from {
-    opacity: 0;
-    transform: scale(0.95) translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+.dashboard-page-image {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  display: block;
+  user-select: none;
+  /* Ensure browser uses high-quality bicubic downsampling / filtering */
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }

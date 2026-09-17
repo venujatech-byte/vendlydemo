@@ -1,44 +1,34 @@
 /* ==========================================================================
-   Vendly Seller Dashboard Sidebar
+   Vendly Seller Dashboard Sidebar — Exact Reference Match
    ========================================================================== */
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 210px;
-  flex: 0 0 210px;
+  width: 170px;
+  flex: 0 0 170px;
   position: relative;
   height: 100vh;
   min-height: 100vh;
   max-height: 100vh;
-  padding: 16px 12px 16px;
+  padding: 16px 12px 14px;
+  box-sizing: border-box;
   color: #ffffff;
   background: linear-gradient(
-    180deg,
-    #002444 0%,
-    #05325c 40%,
-    #042646 100%
+    to bottom right,
+    #002d52 0%,
+    #063b6a 50%,
+    #00315c 100%
   );
-  box-shadow: 2px 0 16px rgba(0, 20, 48, 0.25);
   overflow-x: hidden;
   overflow-y: auto;
-  transition: width 240ms cubic-bezier(0.22, 1, 0.36, 1),
-              flex-basis 240ms cubic-bezier(0.22, 1, 0.36, 1),
-              padding 240ms cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 100;
   user-select: none;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Collapsed State */
-.sidebar--collapsed {
-  width: 68px;
-  flex: 0 0 68px;
-  padding: 16px 8px 16px;
+  z-index: 10;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* --------------------------------------------------------------------------
-   Logo & Subtitle Area
+   Top Logo & Subtitle
    -------------------------------------------------------------------------- */
 .sidebar__top {
   display: flex;
@@ -46,120 +36,74 @@
   align-items: center;
   text-align: center;
   margin-bottom: 22px;
-  padding: 0 4px;
-  position: relative;
+  padding: 0;
 }
 
-.sidebar__logo-wrapper {
+.sidebar__logo {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   cursor: pointer;
-  padding: 4px;
-  border-radius: 8px;
-  transition: opacity 150ms ease, transform 150ms ease;
-}
-
-.sidebar__logo-wrapper:hover {
-  transform: scale(1.02);
 }
 
 .sidebar__logo-image {
   display: block;
-  width: 125px;
+  width: 110px;
   max-width: 100%;
-  height: 38px;
+  height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
-}
-
-.sidebar--collapsed .sidebar__logo-image {
-  width: 34px;
-  height: 34px;
 }
 
 .sidebar__subtitle {
   display: block;
-  color: #92b8dc;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  color: #adc2d6;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   margin-top: 5px;
   white-space: nowrap;
 }
 
-.sidebar--collapsed .sidebar__subtitle {
-  display: none;
-}
-
-.sidebar__collapse-toggle {
-  position: absolute;
-  right: 0;
-  top: 4px;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  color: #c4d8ec;
-  cursor: pointer;
-  transition: all 160ms ease;
-}
-
-.sidebar--collapsed .sidebar__collapse-toggle {
-  position: static;
-  margin-top: 10px;
-}
-
-.sidebar__collapse-toggle:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
-}
-
 /* --------------------------------------------------------------------------
-   Navigation Items
+   Navigation Links
    -------------------------------------------------------------------------- */
 .sidebar__navigation {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   flex: 1;
 }
 
 .sidebar__link {
-  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
-  min-height: 44px;
-  padding: 0 12px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0 14px;
   border: 0;
-  border-radius: 9px;
-  color: #c0d4ea;
+  border-radius: 8px;
+  color: #c4d5e6;
   background: transparent;
   font-family: inherit;
-  font-size: 0.88rem;
+  font-size: 13.5px;
   font-weight: 600;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
+  box-sizing: border-box;
   transition: color 150ms ease, background 150ms ease, transform 150ms ease;
 }
 
 .sidebar__link svg {
-  width: 19px;
-  height: 19px;
+  width: 18px;
+  height: 18px;
   stroke: currentColor;
+  stroke-width: 2.2;
   flex-shrink: 0;
   color: inherit;
-  transition: transform 160ms ease;
 }
 
 .sidebar__label {
@@ -167,17 +111,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: inherit;
-  flex: 1;
-}
-
-.sidebar--collapsed .sidebar__link {
-  justify-content: center;
-  padding: 0;
-  min-height: 44px;
-}
-
-.sidebar--collapsed .sidebar__label {
-  display: none;
 }
 
 /* Inactive Hover */
@@ -187,91 +120,67 @@
   transform: translateX(2px);
 }
 
-.sidebar--collapsed .sidebar__link:hover:not(.sidebar__link--active) {
-  transform: scale(1.05);
-}
-
-/* Active Page Link */
+/* Active Page Link: Matches Storefront Sky-Blue Pill */
 .sidebar__link--active {
-  color: #032b50 !important;
-  background: linear-gradient(135deg, #53abff 0%, #308ff0 100%) !important;
-  box-shadow: 0 6px 18px rgba(0, 110, 220, 0.35);
-  font-weight: 700;
+  color: #032c50 !important;
+  background: linear-gradient(135deg, #56a8ff 0%, #3d91ec 100%) !important;
+  box-shadow: 0 6px 16px rgba(0, 85, 170, 0.28);
+  font-weight: 650;
 }
 
 .sidebar__link--active svg {
-  color: #032b50 !important;
-  stroke: #032b50 !important;
-  transform: scale(1.04);
+  color: #032c50 !important;
+  stroke: #032c50 !important;
+  stroke-width: 2.4;
+}
+
+.sidebar__link--active .sidebar__label {
+  color: #032c50 !important;
 }
 
 .sidebar__link--active:hover {
   transform: none;
-  filter: brightness(1.04);
-}
-
-/* Badges */
-.sidebar__badge {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.14);
-  color: #d8eaff;
-  line-height: 1;
-}
-
-.sidebar__badge--active {
-  background: rgba(3, 43, 80, 0.2);
-  color: #032b50;
-}
-
-.sidebar--collapsed .sidebar__badge {
-  display: none;
 }
 
 /* --------------------------------------------------------------------------
-   Footer / Current Business Selector
+   Footer / Profile Anchor
    -------------------------------------------------------------------------- */
 .sidebar__footer {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 10px;
 }
 
 .sidebar__business {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  padding: 6px 4px;
+  padding: 10px 4px 0;
   border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
   color: #ffffff;
   background-color: transparent;
   text-align: left;
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 160ms ease;
-}
-
-.sidebar__business:hover {
-  background: rgba(255, 255, 255, 0.08);
 }
 
 .sidebar__business-icon {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 7px;
+  background-color: rgba(255, 255, 255, 0.08);
   color: #ffffff;
+}
+
+.sidebar__business-icon svg {
+  width: 15px;
+  height: 15px;
 }
 
 .sidebar__business-details {
@@ -284,7 +193,7 @@
 
 .sidebar__business-details strong {
   overflow: hidden;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #ffffff;
   text-overflow: ellipsis;
@@ -292,98 +201,12 @@
 }
 
 .sidebar__business-details small {
-  font-size: 10px;
-  color: #9ac2e8;
+  font-size: 9.5px;
+  color: #adc2d6;
   font-weight: 500;
 }
 
 .sidebar__business-arrow {
-  color: rgba(255, 255, 255, 0.7);
+  color: #adc2d6;
   flex-shrink: 0;
-  transition: transform 180ms ease;
-}
-
-.sidebar__business-arrow.is-open {
-  transform: rotate(90deg);
-}
-
-.sidebar--collapsed .sidebar__business {
-  justify-content: center;
-  padding: 4px 0;
-}
-
-.sidebar--collapsed .sidebar__business-details,
-.sidebar--collapsed .sidebar__business-arrow {
-  display: none;
-}
-
-/* Profile Menu Popup */
-.sidebar__profile-menu {
-  position: absolute;
-  right: 0;
-  bottom: calc(100% + 8px);
-  left: 0;
-  z-index: 120;
-  display: grid;
-  gap: 3px;
-  padding: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 12px;
-  color: #0f172a;
-  background: #ffffff;
-  box-shadow: 0 16px 36px rgba(0, 16, 40, 0.35);
-  animation: profileMenuPop 180ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sidebar--collapsed .sidebar__profile-menu {
-  left: calc(100% + 10px);
-  right: auto;
-  bottom: 0;
-  width: 190px;
-}
-
-.sidebar__profile-menu button {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  width: 100%;
-  min-height: 34px;
-  padding: 0 10px;
-  border: 0;
-  border-radius: 7px;
-  color: #1e293b;
-  background: transparent;
-  cursor: pointer;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: left;
-  transition: background-color 140ms ease, color 140ms ease;
-}
-
-.sidebar__profile-menu button:hover {
-  color: #0284c7;
-  background: #f1f5f9;
-}
-
-.sidebar__profile-menu .sidebar__profile-menu-danger {
-  margin-top: 4px;
-  border-top: 1px solid #e2e8f0;
-  color: #e11d48;
-}
-
-.sidebar__profile-menu .sidebar__profile-menu-danger:hover {
-  color: #be123c;
-  background: #fff1f2;
-}
-
-@keyframes profileMenuPop {
-  from {
-    opacity: 0;
-    transform: translateY(6px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
